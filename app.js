@@ -4,4 +4,4 @@ const {Builder, By, Key, until} = require('selenium-webdriver'),
 
 let driver = new Builder().forBrowser('chrome').build();
 
-driver.get('https://google.com'); //<---- known bug(doesn't open proper page)
+driver.get('https://supremenewyork.com');
