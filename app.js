@@ -20,7 +20,7 @@ async function main() {
     //end of get to shop/cat
     //--------------------------------------------------------------
     //start of select item (bugged code starts below and ends at end of select item.)
-    let element2 = await driver.wait(until.elementLocated(By.xpath("//article/div/a[contains(text(),'"+item+"') and //article/div/a[contains(text(),'"+color+"']",100)));
+    let element2 = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'"+item+"')][contains(text(),'"+color+"')]",100)));
     element2.click();
     //end of select item
 }
