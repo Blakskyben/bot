@@ -1,9 +1,9 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
 let category = null;
-category = "Jackets";
+category = "jackets";
 category = category.toLowerCase();
 let item = null;
-item = "GORE-TEX 700-Fill Down Parka";
+item = "GORE-TEX";
 let color = null;
 color = "Black"
 async function main() {
@@ -20,7 +20,7 @@ async function main() {
     //end of get to shop/cat
     //--------------------------------------------------------------
     //start of select item (bugged code starts below and ends at end of select item.)
-    let element2 = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'"+item+"')][contains(text(),'"+color+"')]",100)));
+    let element2 = await driver.wait(until.elementLocated(By.linkText(item,color)));
     element2.click();
     //end of select item
 }
