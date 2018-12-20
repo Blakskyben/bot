@@ -23,7 +23,7 @@ async function main() {
     let itemColor = await driver.wait(until.elementLocated(By.xpath("//*[@id='container']/article/div/p/a")));
 
     for (var i = 0; i < itemName.length; i++) {
-      if (itemName[i]==item && itemColor==color){
+      if (itemName[i]==item && itemColor[i]==color){
         findElement(By.xpath("//*[@id='container']/article'"+[i]+"'/div/h1/a")).click();
       } else {
         continue;
