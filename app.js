@@ -18,24 +18,15 @@ async function main() {
     await element0.click();
     let element1 = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'"+category+"')]", 100)));
     await element1.click();
-
-    let itemCount = await driver.wait(until.elementLocated(By.xpath("//*[@id='container']/article",1000)));
-    let itemName = await driver.wait(until.elementLocated(By.xpath("//*[@id='container']/article/div/h1/a",1000)));
-    let itemColor = await driver.wait(until.elementLocated(By.xpath("//*[@id='container']/article/div/p/a",1000)));
-
-    for (var i = 0; i < itemCount.length; i++) {
-     if ("//*[@id='container']/article/div/h1/a/*[text()[normalize-space(.)='"+[i]+"']]"==item && "//*[@id='container']/article/div/p/a/*[text()[normalize-space(.)='"+[i]+"']]"==color){
-       findElement(By.xpath("//*[@id='container']/article'"+[i]+"'/div/h1/a")).click();
+    
+    for (var i = 0; i < 100; i++) {
+      console.log('hii');
+     if (driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/h1/a/*[text()[normalize-space(.)='"+item+"']")) && driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/p/a/*[text()[normalize-space(.)='"+color+"']"))){
+       driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/h1/a")).click();
      } else {
        continue;
      }
     }
-    //end of get to shop/cat
-    //--------------------------------------------------------------
-    //start of select item
-    // let element2 = await driver.wait(until.elementLocated(By.linkText("Lime")));
-    // element2.click();
-    //end of select item
   } catch(err) {
     console.log(err);
     driver.quit();
