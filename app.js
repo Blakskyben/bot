@@ -3,9 +3,9 @@ let category = null;
 category = "jackets";
 category = category.toLowerCase();
 let item = null;
-item = "Supreme®/Schott® Down Leather Vest Puffy Jacket";
+item = "Leather";
 let color = null;
-color = "Silver"
+color = "Black"
 async function main() {
   try{
     let driver = new Builder().forBrowser('chrome').build();
@@ -19,10 +19,10 @@ async function main() {
     let element1 = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'"+category+"')]", 100)));
     await element1.click();
 
-    for (var i = 0; i < 100; i++) {
-      console.log('hii');
-     if (driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/h1/a/*[text()[normalize-space(.)='"+item+"']")) && driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/p/a/*[contains(text(),'"+color+"')]"))){
-       driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/h1/a")).click();
+    for (var i = 1; i < 100; i++) {
+     if (driver.findElement(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/p/a[contains(text(),'"+color+"')]")) && driver.findElement(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/h1/a[contains(text(),'"+item+"')]"))){
+      let clikkk = await driver.wait(until.elementLocated(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/p/a[contains(text(),'"+color+"')]")));
+      clikkk.click();
      } else {
        continue;
      }
