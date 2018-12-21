@@ -18,10 +18,10 @@ async function main() {
     await element0.click();
     let element1 = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'"+category+"')]", 100)));
     await element1.click();
-    
+
     for (var i = 0; i < 100; i++) {
       console.log('hii');
-     if (driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/h1/a/*[text()[normalize-space(.)='"+item+"']")) && driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/p/a/*[text()[normalize-space(.)='"+color+"']"))){
+     if (driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/h1/a/*[text()[normalize-space(.)='"+item+"']")) && driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/p/a/*[contains(text(),'"+color+"')]"))){
        driver.findElement(By.xpath("//*[@id='container']/article["+i+"]/div/h1/a")).click();
      } else {
        continue;
