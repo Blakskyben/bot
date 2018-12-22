@@ -6,6 +6,8 @@ let item = null;
 item = "Leather";
 let color = null;
 color = "Black"
+let size = null;
+size = "XL"
 async function main() {
   try{
     let driver = new Builder().forBrowser('chrome').build();
@@ -23,14 +25,19 @@ async function main() {
      if (driver.findElement(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/p/a[contains(text(),'"+color+"')]")) && driver.findElement(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/h1/a[contains(text(),'"+item+"')]"))){
       let clikkk = await driver.wait(until.elementLocated(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/p/a[contains(text(),'"+color+"')]")));
       clikkk.click();
+      break;
      } else {
        continue;
      }
     }
+    await driver.wait(until.elementLocated(By.xpath("//*[@id='s']/option[contains(text(),'"+size+"')]"))).click();
   } catch(err) {
     console.log(err);
-    driver.quit();
+    await driver.quit();
+  } finally {
+    await driver.quit();
   }
+
 }
 
 main();
