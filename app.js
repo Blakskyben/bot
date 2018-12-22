@@ -31,6 +31,7 @@ async function main() {
      }
     }
     await driver.wait(until.elementLocated(By.xpath("//*[@id='s']/option[contains(text(),'"+size+"')]"))).click();
+    driver.findElement(By.xpath("//input[@value='add to cart']")).click();
   } catch(err) {
     console.log(err);
     await driver.quit();
