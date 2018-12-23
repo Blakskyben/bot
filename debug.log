@@ -136,3 +136,7 @@
 [1221/180014.922:ERROR:exception_snapshot_win.cc(88)] thread ID 15168 not found in process
 [1221/180043.170:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [1221/180043.171:ERROR:exception_snapshot_win.cc(88)] thread ID 6840 not found in process
+[1222/033132.965:ERROR:process_reader_win.cc(123)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
+[1222/033132.967:ERROR:exception_snapshot_win.cc(88)] thread ID 10852 not found in process
+[1222/120253.429:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)
+[1222/120305.467:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: The pipe has been ended. (0x6D)

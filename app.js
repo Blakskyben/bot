@@ -8,6 +8,8 @@ let color = null;
 color = "Black"
 let size = null;
 size = "XL"
+let name = null;
+name = "it's me"
 async function main() {
   try{
     let driver = new Builder().forBrowser('chrome').build();
@@ -32,11 +34,13 @@ async function main() {
     }
     await driver.wait(until.elementLocated(By.xpath("//*[@id='s']/option[contains(text(),'"+size+"')]"))).click();
     driver.findElement(By.xpath("//input[@value='add to cart']")).click();
+    await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'checkout now')]"))).click();
+    driver.findElement(By.id("order_billing_name")).setAttribute("value",name);
   } catch(err) {
     console.log(err);
-    await driver.quit();
+    // await driver.quit();
   } finally {
-    await driver.quit();
+    // await driver.quit();
   }
 
 }
