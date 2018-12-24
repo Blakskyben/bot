@@ -35,7 +35,8 @@ async function main() {
     await driver.wait(until.elementLocated(By.xpath("//*[@id='s']/option[contains(text(),'"+size+"')]"))).click();
     driver.findElement(By.xpath("//input[@value='add to cart']")).click();
     await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'checkout now')]"))).click();
-    driver.findElement(By.id("order_billing_name")).setAttribute("value",name);
+    await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='name']"))).click();
+    driver.findElement(By.xpath("//*[@placeholder='name']")).sendKeys(name);
   } catch(err) {
     console.log(err);
     // await driver.quit();
