@@ -1,15 +1,21 @@
 const { Builder, By, Key, until } = require('selenium-webdriver');
-let category = null;
-category = "jackets";
+let category = null,
+  item = null
+  color = null
+  size = null
+  name = null,
+  email = null,
+  phone = null;
+
+category = "tops";
 category = category.toLowerCase();
-let item = null;
-item = "Leather";
-let color = null;
-color = "Black"
-let size = null;
-size = "XL"
-let name = null;
-name = "it's me"
+item = "Knit Stripe";
+color = "Navy";
+size = "XL";
+name = "it's me";
+email = "oh no, not my email...";
+phone = "you wanna stalk me? Go ahead.";
+
 async function main() {
   try{
     let driver = new Builder().forBrowser('chrome').build();
@@ -34,9 +40,17 @@ async function main() {
     }
     await driver.wait(until.elementLocated(By.xpath("//*[@id='s']/option[contains(text(),'"+size+"')]"))).click();
     driver.findElement(By.xpath("//input[@value='add to cart']")).click();
+
     await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'checkout now')]"))).click();
+
     await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='name']"))).click();
     driver.findElement(By.xpath("//*[@placeholder='name']")).sendKeys(name);
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='email']"))).click();
+    driver.findElement(By.xpath("//*[@placeholder='email']")).sendKeys(email);
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='tel']"))).click();
+    driver.findElement(By.xpath("//*[@placeholder='tel']")).sendKeys(phone);
   } catch(err) {
     console.log(err);
     // await driver.quit();
