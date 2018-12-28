@@ -5,16 +5,23 @@ let category = null,
   size = null
   name = null,
   email = null,
-  phone = null;
+  phone = null,
+  address = null,
+  apt = null,
+  zip = null;
 
 category = "tops";
 category = category.toLowerCase();
-item = "Knit Stripe";
-color = "Navy";
+item = "Down Leather";
+color = "Black";
 size = "XL";
-name = "it's me";
-email = "oh no, not my email...";
-phone = "you wanna stalk me? Go ahead.";
+name = "Ben Levy";
+email = "general@simplexwebsites.com";
+phone = "9142009372";
+address = "10 Windmill Pl";
+apt = "";
+zip = "10504";
+
 
 async function main() {
   try{
@@ -51,6 +58,16 @@ async function main() {
 
     await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='tel']"))).click();
     driver.findElement(By.xpath("//*[@placeholder='tel']")).sendKeys(phone);
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='address']"))).click();
+    driver.findElement(By.xpath("//*[@placeholder='address']")).sendKeys(address);
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='apt']"))).click();
+    driver.findElement(By.xpath("//*[@placeholder='apt']")).sendKeys(apt);
+    //bug starts below
+    await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='zip']"))).click();
+    driver.findElement(By.xpath("//*[@placeholder='zip']")).sendKeys(zip);
+    //bug end
   } catch(err) {
     console.log(err);
     // await driver.quit();
