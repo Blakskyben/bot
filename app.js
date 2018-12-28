@@ -48,7 +48,7 @@ async function main() {
     await driver.wait(until.elementLocated(By.xpath("//*[@id='s']/option[contains(text(),'"+size+"')]"))).click();
     driver.findElement(By.xpath("//input[@value='add to cart']")).click();
 
-    await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'checkout now')]"))).click();
+    await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'checkout')]"))).click();
 
     await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='name']"))).click();
     driver.findElement(By.xpath("//*[@placeholder='name']")).sendKeys(name);
@@ -61,12 +61,14 @@ async function main() {
 
     await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='address']"))).click();
     driver.findElement(By.xpath("//*[@placeholder='address']")).sendKeys(address);
+    if(apt!=null){
+      await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='apt']"))).click();
+      driver.findElement(By.xpath("//*[@placeholder='apt']")).sendKeys(apt);
+    } else {}
 
-    await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='apt']"))).click();
-    driver.findElement(By.xpath("//*[@placeholder='apt']")).sendKeys(apt);
     //bug starts below
     await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='zip']"))).click();
-    driver.findElement(By.xpath("//*[@placeholder='zip']")).sendKeys(zip);
+    driver.findElement(By.xpath("//*[@id='order_billing_zip']")).sendKeys(zip);
     //bug end
   } catch(err) {
     console.log(err);
