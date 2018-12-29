@@ -8,7 +8,10 @@ let category = null,
   phone = null,
   address = null,
   apt = null,
-  zip = null;
+  zip = null,
+  cardNum = null,
+  cardExpMn = null,
+  cardExpYr = null;
 
 category = "tops";
 category = category.toLowerCase();
@@ -21,7 +24,9 @@ phone = "9142009372";
 address = "10 Windmill Pl";
 apt = "";
 zip = "10504";
-
+cardNum= "1234678890";
+cardExpMn = 1;
+cardExpYr = 2019;
 
 async function main() {
   try{
@@ -48,7 +53,8 @@ async function main() {
     await driver.wait(until.elementLocated(By.xpath("//*[@id='s']/option[contains(text(),'"+size+"')]"))).click();
     driver.findElement(By.xpath("//input[@value='add to cart']")).click();
 
-    await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'checkout')]"))).click();
+    const el = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'checkout')]")),10);
+    el.click();
 
     await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='name']"))).click();
     driver.findElement(By.xpath("//*[@placeholder='name']")).sendKeys(name);
@@ -61,20 +67,26 @@ async function main() {
 
     await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='address']"))).click();
     driver.findElement(By.xpath("//*[@placeholder='address']")).sendKeys(address);
-    if(apt!=null){
-      await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='apt']"))).click();
-      driver.findElement(By.xpath("//*[@placeholder='apt']")).sendKeys(apt);
-    } else {}
 
-    //bug starts below
     await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='zip']"))).click();
     driver.findElement(By.xpath("//*[@id='order_billing_zip']")).sendKeys(zip);
-    //bug end
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@id='nnaerb']"))).click();
+    driver.findElement(By.xpath("//*[@id='nnaerb']")).sendKeys(cardNum);
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@id='credit_card_month']"))).click();
+    driver.findElement(By.xpath("//*[@id='credit_card_month']/option[@value="+cardExpMn+"]")).click();
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@id='credit_card_year']"))).click();
+    driver.findElement(By.xpath("//*[@id='credit_card_year']/option[@value="+cardExpYr+"]")).click();
+
   } catch(err) {
     console.log(err);
-    // await driver.quit();
+    driver.close();
+    await driver.quit();
   } finally {
-    // await driver.quit();
+    driver.close();
+    driver.quit();
   }
 
 }
