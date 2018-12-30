@@ -11,7 +11,8 @@ let category = null,
   zip = null,
   cardNum = null,
   cardExpMn = null,
-  cardExpYr = null;
+  cardExpYr = null,
+  cvv = null;
 
 category = "tops";
 category = category.toLowerCase();
@@ -27,6 +28,7 @@ zip = "10504";
 cardNum= "1234678890";
 cardExpMn = 1;
 cardExpYr = 2019;
+cvv = 123;
 
 async function main() {
   try{
@@ -79,6 +81,12 @@ async function main() {
 
     await driver.wait(until.elementLocated(By.xpath("//*[@id='credit_card_year']"))).click();
     driver.findElement(By.xpath("//*[@id='credit_card_year']/option[@value="+cardExpYr+"]")).click();
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@placeholder='CVV']"))).click();
+    driver.findElement(By.xpath("//*[@placeholder='CVV']")).sendKeys(cvv);
+
+    await driver.wait(until.elementLocated(By.xpath("//*[@id='cart-cc']/fieldset/p[2]/label/div/ins"))).click();
+    await driver.wait(until.elementLocated(By.xpath("//*[@id='pay']/input"))).click();
 
   } catch(err) {
     console.log(err);
