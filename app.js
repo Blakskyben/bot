@@ -1,36 +1,64 @@
-const { Builder, By, Key, until } = require('selenium-webdriver');
-let category = null,
-  item = null
-  color = null
-  size = null
-  name = null,
-  email = null,
-  phone = null,
-  address = null,
-  apt = null,
-  zip = null,
-  cardNum = null,
-  cardExpMn = null,
-  cardExpYr = null,
-  cvv = null;
+const { Builder, By, Key, until } = require('selenium-webdriver'),
+  express = require("express"),
+  app = express(),
+  bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
 
-category = "tops";
-category = category.toLowerCase();
-item = "Down Leather";
-color = "Black";
-size = "XL";
-name = "Ben Levy";
-email = "general@simplexwebsites.com";
-phone = "9142009372";
-address = "10 Windmill Pl";
-apt = "";
-zip = "10504";
-cardNum= "1234678890";
-cardExpMn = 1;
-cardExpYr = 2019;
-cvv = 123;
+app.use(express.static("./public"));
+app.use(express.static("./public/css"));
 
-async function main() {
+// let category = null,
+//   item = null
+//   color = null
+//   size = null
+//   name = null,
+//   email = null,
+//   phone = null,
+//   address = null,
+//   zip = null,
+//   cardNum = null,
+//   cardExpMn = null,
+//   cardExpYr = null,
+//   cvv = null;
+
+// category = "tops";
+// category = category.toLowerCase();
+// item = "Down Leather";
+// color = "Black";
+// size = "XL";
+// name = "Ben Levy";
+// email = "general@simplexwebsites.com";
+// phone = "9142009372";
+// address = "10 Windmill Pl";
+// apt = "";
+// zip = "10504";
+// cardNum= "1234678890";
+// cardExpMn = 1;
+// cardExpYr = 2019;
+// cvv = 123;
+
+app.get("/",(req, res)=>{
+  res.render("index.ejs");
+});
+
+app.get("/supreme",(req,res)=>{
+  res.render("supreme.ejs");
+});
+
+app.get("/nike",(req,res)=>{
+  res.render("nike.ejs");
+});
+
+app.post("/supreme", (req,res)=>{
+  supremeFunc(req.body.category, req.body.color, req.body.size, req.body.name, req.body.email, req.body.phone, req.body.address, req.body.zip, req.body.cardNum, req.body.cardExpMn, req.body.cardExpYr, req.body.cvv);
+});
+
+app.post("/nike", (req,res)=>{
+
+});
+
+//functions below
+async function supremeFunc(category, color, size, name, email, phone, address, zip, cardNum, cardExpMn, cardExpYr, cvv) {
   try{
     let driver = new Builder().forBrowser('chrome').build();
 
@@ -43,6 +71,10 @@ async function main() {
     let element1 = await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'"+category+"')]", 100)));
     await element1.click();
 
+    while(await driver.wait(until.elementLocated(By.xpath("/*[contains(text(),'"+item+"')]")))==null){
+      driver.navigate().refresh();
+    }
+
     for (var i = 1; i < 100; i++) {
      if (driver.findElement(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/p/a[contains(text(),'"+color+"')]")) && driver.findElement(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/h1/a[contains(text(),'"+item+"')]"))){
       let clikkk = await driver.wait(until.elementLocated(By.xpath("/html/body/div[1]/div/article['"+i+"']/div/p/a[contains(text(),'"+color+"')]")));
@@ -52,6 +84,7 @@ async function main() {
        continue;
      }
     }
+
     await driver.wait(until.elementLocated(By.xpath("//*[@id='s']/option[contains(text(),'"+size+"')]"))).click();
     driver.findElement(By.xpath("//input[@value='add to cart']")).click();
 
@@ -92,11 +125,7 @@ async function main() {
     console.log(err);
     driver.close();
     await driver.quit();
-  } finally {
-    driver.close();
-    driver.quit();
   }
-
 }
 
-main();
+app.listen("3000");

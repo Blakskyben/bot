@@ -1,0 +1,16 @@
+a{
+  background-color: red;
+  padding: 10px;
+  color: white;
+  font-size: 20px;
+  text-decoration: none;
+  margin: 5px;
+}
+
+#indexCon{
+  height: 95vh;
+  width: 95vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
